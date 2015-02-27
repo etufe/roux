@@ -5,7 +5,7 @@
 //   css: css
 //   sass: _scss
 //   javascript: js
-//   coffeescript: _src
+//   coffeescript: coffee
 //   images: img
 //   fonts: fonts
 
@@ -31,7 +31,7 @@ module.exports = function (grunt) {
         tasks: ['copy:stageCss', 'autoprefixer:dist']
       },
       coffee: {
-        files: ['<%= yeoman.app %>/_src/**/*.coffee'],
+        files: ['<%= yeoman.app %>/coffee/**/*.coffee'],
         tasks: ['coffee:dist']
       },
       coffeeTest: {
@@ -159,7 +159,7 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/_src',
+          cwd: '<%= yeoman.app %>/coffee',
           src: '**/*.coffee',
           dest: '.tmp/js',
           ext: '.js'
@@ -325,7 +325,7 @@ module.exports = function (grunt) {
           'level': 'ignore'
         }
       },
-      check: ['<%= yeoman.app %>/_src/*.coffee']
+      check: ['<%= yeoman.app %>/coffee/*.coffee']
     },
     jshint: {
       options: {
