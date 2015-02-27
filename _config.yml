@@ -4,7 +4,7 @@
 # 3. config.yml
 
 name: roux
-description: 
+description:
 author:
   name: Etufé
   email: humans@etufe.com
@@ -38,4 +38,3 @@ markdown: kramdown
 #     coderay_bold_every: 10
 #     coderay_css: style
 
-pygments: true
