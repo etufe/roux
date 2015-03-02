@@ -21,12 +21,12 @@
 .c1, /* Comment.Single */
 .cs, /* Comment.Special */
 .gu{ /* Generic.Subheading */
-  color: #75715e;
+  color: #949494;
 }
 
 .kd, /* Keyword.Declaration */
 .k{  /* Keyword */
-  color: #3d6157;
+  color: #508072;
 }
 
 .o,  /* Operator */
@@ -34,7 +34,7 @@
 .gd, /* Generic.Deleted */
 .kn, /* Keyword.Namespace */
 .ow{ /* Operator.Word */
-  color: #8d5772;
+  color: #a66786;
 }
 
 .n,  /* Name */
@@ -50,7 +50,7 @@
 .vc, /* Name.Variable.Class */
 .vg, /* Name.Variable.Global */
 .vi{ /* Name.Variable.Instance */
-  color: #A7A7A7;
+  color: #bfbfbf;
 }
 
 .kc, /* Keyword.Constant */
@@ -69,7 +69,7 @@
 .ne, /* Name.Exception */
 .nf, /* Name.Function */
 .nx{ /* Name.Other */
-  color: #627395
+  color: #7286ad;
 }
 
 .m,  /* Literal.Number */
@@ -93,5 +93,5 @@
 .sr, /* Literal.String.Regex */
 .s1, /* Literal.String.Single */
 .ss{ /* Literal.String.Symbol */
-  color: #7d8d57;
+  color: #93a667;
 }
