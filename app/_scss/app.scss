@@ -20,6 +20,7 @@ body, html{
 #main-column{
   width: 700px;
   margin: auto;
+  min-height: 100%;
 }
 
 /* Header */
@@ -53,6 +54,15 @@ header{
       border: 1px solid rgba(0,0,0,.5);
       box-shadow: 0 0 3px rgba(0,0,0,.5);
     }
+  }
+}
+
+footer{
+  padding-left: 15px;
+  border-top: 1px solid #777;
+  margin-top: 20px;
+  a {
+    color: #777;
   }
 }
 
