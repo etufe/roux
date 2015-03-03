@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/css/syntax.css">
     <link rel="stylesheet" href="/css/boilerplate.css">
     <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/app-medium.css">
     <!-- endbuild -->
 
     <!-- build:js({app,.tmp}) /js/head-scripts.js -->
@@ -25,10 +26,12 @@
   <body>
     {% include browse_happy.html %}
     <header>
-      <a id="logo" href="/" alt="Etufé Blog"></a>
-      <a id="subscribe" href="/feed.xml" alt="RSS Feed">
-        <span class="icon">&#9873;</span>SUBSCRIBE
-      </a>
+      <div class="container">
+        <a id="logo" href="/" alt="Etufé Blog"></a>
+        <a id="subscribe" href="/feed.xml" alt="RSS Feed">
+          <span class="icon">&#9873;</span>SUBSCRIBE
+        </a>
+      </div>
     </header>
     <div id="main-column">
       {{ content }}
