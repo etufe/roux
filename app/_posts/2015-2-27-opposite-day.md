@@ -14,6 +14,9 @@ defmodule OppositeDay do
 end
 {% endhighlight %}
 
+osaneuthsanteohu sanoteuhastoehu
+aoentuhasnoteuhazz
+
 {% highlight elixir linenos %}
 defmodule TodayIs do
   use OppositeDay    # <- Calls OppositeDay.__using__

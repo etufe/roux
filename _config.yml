@@ -3,8 +3,9 @@
 # 2. config.build.yml
 # 3. config.yml
 
-name: roux
-description:
+name: Etufé
+description: Oh the sweet ramblings.
+url: http://blog.etufe.com
 author:
   name: Etufé
   email: humans@etufe.com
