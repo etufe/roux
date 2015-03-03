@@ -31,7 +31,7 @@ module.exports = function (grunt) {
         tasks: ['copy:stageCss', 'autoprefixer:dist']
       },
       coffee: {
-        files: ['<%= yeoman.app %>/coffee/**/*.coffee'],
+        files: ['<%= yeoman.app %>/_coffee/**/*.coffee'],
         tasks: ['coffee:dist']
       },
       coffeeTest: {
@@ -159,7 +159,7 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/coffee',
+          cwd: '<%= yeoman.app %>/_coffee',
           src: '**/*.coffee',
           dest: '.tmp/js',
           ext: '.js'
@@ -326,7 +326,7 @@ module.exports = function (grunt) {
           'level': 'ignore'
         }
       },
-      check: ['<%= yeoman.app %>/coffee/*.coffee']
+      check: ['<%= yeoman.app %>/_coffee/*.coffee']
     },
     jshint: {
       options: {

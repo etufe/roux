@@ -9,7 +9,6 @@
 
     <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
 
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
     <!-- build:css({app,.tmp}) /css/main.css -->
     <link rel="stylesheet" href="/_bower_components/normalize-css/normalize.css">
     <link rel="stylesheet" href="/css/syntax.css">
@@ -26,8 +25,16 @@
   </head>
   <body>
     {% include browse_happy.html %}
+    <nav id="mini-nav">
+      <a class="row" href="http://etufe.com">
+        &#127969; Home
+      </a>
+      <a class="row" href="/feed.xml">
+        &#9873; Subscribe
+      </a>
+    </nav>
     <header>
-      <div class="container">
+      <nav class="container">
         <a id="logo" href="/" alt="Etufé Blog"></a>
         <a id="subscribe" href="/feed.xml" alt="RSS Feed">
           <span class="icon">&#9873;</span>SUBSCRIBE
@@ -35,7 +42,12 @@
         <a id="home" href="http://etufe.com" alt="RSS Feed">
           <span class="icon">&#127969;</span>HOME
         </a>
-      </div>
+        <div id="mini-nav-btn">
+          <div class="stripe"></div>
+          <div class="stripe"></div>
+          <div class="stripe"></div>
+        </div>
+      </nav>
     </header>
     <div id="main-column">
       {{ content }}

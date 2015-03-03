@@ -11,7 +11,6 @@
     }
     #logo{
       float: left;
-      margin-left: 15px;
     }
     #subscribe, #home{
       float: right;
@@ -21,5 +20,8 @@
   }
   .posts{
     margin-top: 20px;
+  }
+  .page-header{
+    margin-top: 0;
   }
 }

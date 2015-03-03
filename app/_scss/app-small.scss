@@ -1,7 +1,10 @@
-@media screen and (max-width: 710px){
+@media screen and (max-width: 720px){
   header{
     .container{
       width: 100%;
+    }
+    #logo{
+      margin-left: 15px;
     }
     #subscribe{
       float: right;
@@ -49,3 +52,39 @@
   }
 }
 
+@media screen and (max-width: 500px){
+  #subscribe, #home{ display: none!important; }
+  header{
+    box-shadow: 0 -2px 2px rgba(0,0,0,0.2);
+  }
+  #mini-nav-btn{
+    float: right;
+    margin-right: 30px;
+    margin-top: 30px;
+    cursor: pointer;
+    display: inline-block!important;
+    width: 30px;
+    height: 30px;
+    .stripe{
+      background-color: black;
+      height: 4px;
+      border-radius: 4px;
+      margin: 4px 0;
+    }
+  }
+  #mini-nav{
+    display: block;
+    margin-top: -6rem;
+    height: 6rem;
+    background-color: rgba(0,0,0,0.03);
+    .row{
+      display: block;
+      height: 3rem;
+      padding-left: 2rem;
+      padding-top: .5rem;
+      font-size: 1.2rem;
+      color: #7286AD;
+      text-decoration: none;
+    }
+  }
+}

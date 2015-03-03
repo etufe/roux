@@ -31,6 +31,9 @@ body{
 }
 
 /* Header */
+#mini-nav{
+  display: none;
+}
 header{
   position: fixed;
   top: 0px;
@@ -67,11 +70,11 @@ header{
 }
 
 footer{
-  padding-left: 15px;
-  border-top: 1px solid #777;
   position: absolute;
-  left: 0;
   bottom: 0;
+  padding-left: 15px;
+  border-top: 1px solid #bbb;
+  color: #555;
   width: 100%;
   a {
     color: #777;
@@ -90,6 +93,7 @@ footer{
   }
 }
 .page-header{
+  margin-top: 1rem;
   margin-bottom: 15px;
   .page-title{
     margin: 0;
@@ -112,6 +116,23 @@ footer{
     margin-top: 5px;
   }
 }
+.page-footer{
+  text-align: center;
+  margin-bottom: 2rem;
+  h4{
+    display: inline-block;
+    padding: .7rem;
+    font-weight: normal;
+    font-family: Georgia, serif;
+    font-size: .8rem;
+    border: 1px solid #ddd;
+    border-radius: .7rem;
+  }
+  .sans{
+    font-family: sans-serif;
+  }
+}
+
 
 /*-- Code Snippet --*/
 .highlight{
