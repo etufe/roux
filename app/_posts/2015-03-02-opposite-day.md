@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Opposite Day"
+subtitle: "Or the day I learned to love the AST."
 categories: elixir metaprogramming
 ---
 {% highlight elixir linenos %}

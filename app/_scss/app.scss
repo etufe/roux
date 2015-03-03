@@ -3,6 +3,7 @@ body, html{
   font-size: 100%;
   width: 100%;
   height: 100%;
+  margin: 0;
   font-family: Inconsolata,
                Courier,
                "Helvetica Neue",
@@ -11,16 +12,68 @@ body, html{
                sans-serif;
   color:#333;
 }
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
+/* Main Layout */
 #main-column{
   width: 700px;
   margin: auto;
 }
 
-h1{
-  font-size: 3rem;
+/* Header */
+header{
+  position: fixed;
+  top: 0px;
+  left: 15px;
+  width: 120px;
+  text-align:center;
+  #logo{
+    display: inline-block;
+    margin-left: 6px;
+    height: 100px;
+    width: 100px;
+    background-size: contain;
+    background-image: url(/img/logo.png);
+  }
+  #subscribe{
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    border-radius: 3px;
+    border: 1px solid white;
+    transition: all .2s ease-in-out;
+    .icon{
+      margin-right: 3px;
+    }
+    &:hover{
+      padding: 3px 0;
+      border: 1px solid rgba(0,0,0,.5);
+      box-shadow: 0 0 3px rgba(0,0,0,.5);
+    }
+  }
 }
 
+/* Posts */
+.page-header{
+  margin-bottom: 15px;
+  .page-title{
+    margin: 0;
+    font-size: 3rem;
+  }
+  .page-subtitle{
+    margin: 0;
+  }
+  .publication{
+    float: right;
+    color: #555;
+    margin-top: 0;
+  }
+}
+
+/*-- Code Snippet --*/
 .highlight{
   line-height: 1.1;
   padding: 10px;
