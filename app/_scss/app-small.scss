@@ -37,6 +37,9 @@
   .highlight{
     width: 100%;
     border-radius: 0;
+    .lineno{
+      display: none;
+    }
   }
   .posts{
     padding: 0 1rem;
