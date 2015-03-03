@@ -64,9 +64,6 @@ header{
       box-shadow: 0 0 3px rgba(0,0,0,.5);
     }
   }
-  #home{
-    letter-spacing: .1rem;
-  }
 }
 
 footer{
@@ -116,10 +113,14 @@ footer{
     color: #9EABB3;
     text-align: center;
     bottom: -.5rem;
+    right: 0;
     span{
       background-color: white;
       padding: .4rem;
     }
+  }
+  hr{
+    margin-top: .5rem;
   }
 }
 .page-footer{
