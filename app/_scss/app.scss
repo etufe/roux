@@ -2,8 +2,8 @@ body, html{
   background-image: url(/img/old_wall.png);
   font-size: 100%;
   width: 100%;
-  height: 100%;
   margin: 0;
+  min-width: 320px;
   font-family: Inconsolata,
                Courier,
                "Helvetica Neue",
@@ -11,6 +11,13 @@ body, html{
                Arial,
                sans-serif;
   color:#333;
+}
+html{
+  position: relative;
+  min-height: 100%;
+}
+body{
+  margin-bottom: 2rem;
 }
 *{
   box-sizing:border-box;
@@ -20,7 +27,7 @@ body, html{
 #main-column{
   width: 700px;
   margin: auto;
-  min-height: 100%;
+  font-size: 1.1rem;
 }
 
 /* Header */
@@ -38,13 +45,12 @@ header{
     background-size: contain;
     background-image: url(/img/logo.png);
   }
-  #subscribe{
+  #subscribe, #home{
     text-align: center;
     display: block;
     text-decoration: none;
     color: #333;
     border-radius: 3px;
-    border: 1px solid white;
     transition: all .2s ease-in-out;
     .icon{
       margin-right: 3px;
@@ -55,39 +61,65 @@ header{
       box-shadow: 0 0 3px rgba(0,0,0,.5);
     }
   }
+  #home{
+    letter-spacing: .1rem;
+  }
 }
 
 footer{
   padding-left: 15px;
   border-top: 1px solid #777;
-  margin-top: 20px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   a {
     color: #777;
   }
 }
 
 /* Posts */
+.posts{
+  margin-top: 100px;
+  a{
+    color: #7286AD;
+    font-size: 1.2rem;
+    &:visited{
+      color: #666;
+    }
+  }
+}
 .page-header{
   margin-bottom: 15px;
   .page-title{
     margin: 0;
+    font-family: "Open Sans",sans-serif;
     font-size: 3rem;
+    margin-bottom: 6px;
   }
   .page-subtitle{
+    font-family: "Open Sans",sans-serif;
+    float: left;
     margin: 0;
+    margin-bottom: -5px;
   }
-  .publication{
+  time{
     float: right;
-    color: #555;
+    color: #9EABB3;
     margin-top: 0;
+  }
+  hr{
+    margin-top: 5px;
   }
 }
 
 /*-- Code Snippet --*/
 .highlight{
   line-height: 1.1;
+  font-size: 1rem;
   padding: 10px;
   border-radius: 10px;
+  box-shadow: inset 0 0 3px black;
   pre{
     margin: 0;
   }

@@ -1,9 +1,9 @@
 @media screen and (max-width: 1000px){
   header{
-    position: unset;
+    position: relative;
+    left: 0;
     height: 100px;
     width: 100%;
-    border-bottom: 1px solid #777;
     .container{
       width: 700px;
       height: 100px;
@@ -12,15 +12,14 @@
     #logo{
       float: left;
       margin-left: 15px;
-      height: 100px;
-      width: 100px;
-      background-size: contain;
-      background-image: url(/img/logo.png);
     }
-    #subscribe{
+    #subscribe, #home{
       float: right;
       margin-top: 33px;
       width: 120px;
     }
+  }
+  .posts{
+    margin-top: 20px;
   }
 }

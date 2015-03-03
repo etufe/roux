@@ -9,14 +9,15 @@
 
     <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
 
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
     <!-- build:css({app,.tmp}) /css/main.css -->
     <link rel="stylesheet" href="/_bower_components/normalize-css/normalize.css">
     <link rel="stylesheet" href="/css/syntax.css">
     <link rel="stylesheet" href="/css/boilerplate.css">
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/app-medium.css">
+    <link rel="stylesheet" href="/css/app-small.css">
     <!-- endbuild -->
-
     <!-- build:js({app,.tmp}) /js/head-scripts.js -->
     <!-- Replace with a custom modernizer build for production -->
     <script src="/_bower_components/modernizr/modernizr.js"></script>
@@ -31,13 +32,16 @@
         <a id="subscribe" href="/feed.xml" alt="RSS Feed">
           <span class="icon">&#9873;</span>SUBSCRIBE
         </a>
+        <a id="home" href="http://etufe.com" alt="RSS Feed">
+          <span class="icon">&#127969;</span>HOME
+        </a>
       </div>
     </header>
     <div id="main-column">
       {{ content }}
     </div>
     <footer>
-      <a href="http://creativecommons.org/licenses/by-sa/4.0/"> CC-BY-SA-4.0</a> {{ page.date | date: "%Y" }} Etufé
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/"> CC-BY-SA-4.0</a> {{ page.date | date: "%Y" }} &#9884; Etufé
     </footer>
     {% include scripts.html %}
     <!--% include googleanalytics.html %}-->
