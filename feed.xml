@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+	<channel>
+		<title>Etufé</title>
+		<description>Oh the sweet ramblings.</description>
+		<link>http://blog.etufe.com</link>
+		<atom:link href="http://blog.etufe.com/feed.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>The Perfect Static Blog</title>
+				
+				
+					<description>&lt;h2 id=&quot;what-a-time-to-be-alive.&quot;&gt;What a time to be alive.&lt;/h2&gt;
+
+&lt;p&gt;The mass of tools that other people have written to enable the quiet ramblings of the internet is impressive. There must be tens of thousands of lines of open source code fueling this modest, static blog but we&amp;#39;re only 2 sentences in and I digress.&lt;/p&gt;
+</description>
+				
+				<pubDate>Wed, 04 Mar 2015 00:00:00 -0600</pubDate>
+				<link>http://blog.etufe.com/jekyll/blogging/2015/03/04/the-perfect-static-blog/</link>
+				<guid isPermaLink="true">http://blog.etufe.com/jekyll/blogging/2015/03/04/the-perfect-static-blog/</guid>
+			</item>
+		
+	</channel>
+</rss>
+
