@@ -1,10 +1,9 @@
 .highlight{
-  background-color: #202020;
   .lineno{
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
-    color: #444;
+    color: #bbb;
   }
   .hll { background-color: #49483e }
   .ge { font-style: italic } /* Generic.Emph */
@@ -53,7 +52,7 @@
   .vc, /* Name.Variable.Class */
   .vg, /* Name.Variable.Global */
   .vi{ /* Name.Variable.Instance */
-    color: #bfbfbf;
+    color: #b8b886;
   }
 
   .kc, /* Keyword.Constant */
@@ -63,7 +62,8 @@
   .no, /* Name.Constant */
   .ld, /* Literal.Date */
   .s{  /* Literal.String */
-    color: #e6db74;
+    color: #E67474;
+    // color: #e6db74;
   }
 
   .na, /* Name.Attribute */
@@ -96,6 +96,6 @@
   .sr, /* Literal.String.Regex */
   .s1, /* Literal.String.Single */
   .ss{ /* Literal.String.Symbol */
-    color: #93a667;
+    color: #62a36f;
   }
 }

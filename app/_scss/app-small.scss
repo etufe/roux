@@ -1,4 +1,7 @@
-@media screen and (max-width: 720px){
+@media screen and (max-width: 750px){
+  code{
+    white-space: normal;
+  }
   header{
     .container{
       width: 100%;
@@ -30,6 +33,7 @@
   .highlight{
     width: 100%;
     border-radius: 0;
+    box-shadow: inset 0 0 3px rgba(0,0,0,.6);
     .lineno{
       display: none;
     }
@@ -44,6 +48,11 @@
     }
     a{
       display: block;
+    }
+  }
+  article{
+    h2{
+      margin-left: 0;
     }
   }
 }
