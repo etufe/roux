@@ -11,10 +11,10 @@
   .gi { color: #a6e22e } /* Generic.Inserted */
   .l { color: #ae81ff } /* Literal */
 
-  .err {
-    color: #960050;
-    background-color: #1e0010;
-  } /* Error */
+  // .err {
+  //   color: #960050;
+  //   background-color: #1e0010;
+  // } /* Error */
 
 
   .c,  /* Comment */
@@ -39,6 +39,7 @@
     color: #a66786;
   }
 
+  .err,
   .n,  /* Name */
   .p,  /* Punctuation */
   .nb, /* Name.Builtin */
@@ -52,7 +53,7 @@
   .vc, /* Name.Variable.Class */
   .vg, /* Name.Variable.Global */
   .vi{ /* Name.Variable.Instance */
-    color: #b8b886;
+    color: #606052;
   }
 
   .kc, /* Keyword.Constant */
