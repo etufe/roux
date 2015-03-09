@@ -1,3 +1,5 @@
+[blog.etufe.com](blog.etufe.com)
+
 # Roux
 A mixture of flour and fat cooked together and used as a thickening.
 
