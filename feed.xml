@@ -7,6 +7,20 @@
 		<atom:link href="http://blog.etufe.com/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Javascript Only Clipboard Copy</title>
+				
+				
+					<description>&lt;h2 id=&quot;a-tiny-bit-of-history&quot;&gt;A tiny bit of history&lt;/h2&gt;
+
+&lt;p&gt;HTML and Javascript have never had a way to put data into the user&amp;#39;s clipboard. In 2011 the W3C created a &lt;a href=&quot;http://www.w3.org/TR/2011/WD-clipboard-apis-20110412/&quot;&gt;Working Draft&lt;/a&gt; spec to enable it. Fast forward to 2015 and some basic functionality is finally making it&amp;#39;s way into browsers though the &lt;a href=&quot;http://www.w3.org/TR/clipboard-apis/&quot;&gt;Clipboard API and events&lt;/a&gt; spec is still a working draft.&lt;/p&gt;
+</description>
+				
+				<pubDate>Tue, 25 Aug 2015 00:00:00 -0500</pubDate>
+				<link>http://blog.etufe.com/javascript/clipboard/2015/08/25/javascript-only-clipboard-copy/</link>
+				<guid isPermaLink="true">http://blog.etufe.com/javascript/clipboard/2015/08/25/javascript-only-clipboard-copy/</guid>
+			</item>
+		
+			<item>
 				<title>Opposite Day</title>
 				
 				
