@@ -7,6 +7,18 @@
 		<atom:link href="http://blog.etufe.com/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Javascript Inheritance Explained</title>
+				
+				
+					<description>&lt;p&gt;The first step to understanding inheritance in Javascript is to forget everything you know about &lt;a href=&quot;https://i.imgur.com/c5M0p2n.jpg&quot;&gt;&lt;del&gt;slipcovers&lt;/del&gt;&lt;/a&gt; inheritance. &lt;strong&gt;Javascript doesn&amp;#39;t have classes or instances. Javascript has prototypes.&lt;/strong&gt;  There are many ways of working with prototypes. &lt;strong&gt;Let&amp;#39;s have a look at all of them.&lt;/strong&gt;&lt;/p&gt;
+</description>
+				
+				<pubDate>Mon, 23 Nov 2015 00:00:00 -0600</pubDate>
+				<link>http://blog.etufe.com/javascript/inheritance/programming/2015/11/23/javascript-inheritance-explained/</link>
+				<guid isPermaLink="true">http://blog.etufe.com/javascript/inheritance/programming/2015/11/23/javascript-inheritance-explained/</guid>
+			</item>
+		
+			<item>
 				<title>Javascript Only Clipboard Copy</title>
 				
 				
@@ -38,7 +50,7 @@
 				<title>The Perfect Static Blog</title>
 				
 				
-					<description>&lt;h2 id=&quot;what-a-time-to-be-alive.&quot;&gt;What a time to be alive.&lt;/h2&gt;
+					<description>&lt;h2 id=&quot;what-a-time-to-be-alive&quot;&gt;What a time to be alive.&lt;/h2&gt;
 
 &lt;p&gt;The mass of tools that other people have written to enable the quiet ramblings of the internet is impressive. There must be tens of thousands of lines of open source code fueling this modest, static blog but we&amp;#39;re only 2 sentences in and I digress.&lt;/p&gt;
 </description>

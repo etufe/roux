@@ -1,0 +1,295 @@
+<!DOCTYPE html><html class=no-js><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>Javascript Inheritance Explained</title><meta name=description content=""><meta name=viewport content="width=device-width,initial-scale=1"><link rel=apple-touch-icon sizes=57x57 href=/favicon/apple-icon-57x57.png><link rel=apple-touch-icon sizes=60x60 href=/favicon/apple-icon-60x60.png><link rel=apple-touch-icon sizes=72x72 href=/favicon/apple-icon-72x72.png><link rel=apple-touch-icon sizes=76x76 href=/favicon/apple-icon-76x76.png><link rel=apple-touch-icon sizes=114x114 href=/favicon/apple-icon-114x114.png><link rel=apple-touch-icon sizes=120x120 href=/favicon/apple-icon-120x120.png><link rel=apple-touch-icon sizes=144x144 href=/favicon/apple-icon-144x144.png><link rel=apple-touch-icon sizes=152x152 href=/favicon/apple-icon-152x152.png><link rel=apple-touch-icon sizes=180x180 href=/favicon/apple-icon-180x180.png><link rel=icon type=image/png sizes=192x192 href=/favicon/android-icon-192x192.png><link rel=icon type=image/png sizes=32x32 href=/favicon/favicon-32x32.png><link rel=icon type=image/png sizes=96x96 href=/favicon/favicon-96x96.png><link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png><link rel=manifest href=/favicon/manifest.json><meta name=msapplication-TileColor content=#ffffff><meta name=msapplication-TileImage content=/ms-icon-144x144.png><meta name=theme-color content=#ffffff><link href="http://fonts.googleapis.com/css?family=Amatic+SC" rel=stylesheet type=text/css><!-- <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" /> --><link rel=stylesheet href=/css/main.ae95.css><script src=/js/head-scripts.d1e4.js></script></head><body><!--[if lt IE 8]>
+<p class="browsehappy">
+  You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+</p>
+<![endif]--><nav id=mini-nav><a class=row href=http://etufe.com>&#9055; Etufe.com</a> <a class=row href=/feed.xml>&#9873; Subscribe</a></nav><header><nav class=container><a id=logo href="/" alt="Etufé Blog"></a> <a id=subscribe href=/feed.xml alt="RSS Feed"><span class=icon>&#9873;</span>SUBSCRIBE</a> <a id=home href=http://etufe.com alt="RSS Feed"><span class=icon>&#9055;</span>Etufe.com</a><div id=mini-nav-btn><div class=stripe></div><div class=stripe></div><div class=stripe></div></div></nav></header><div id=main-column><div class=page-header><h1 class=page-title>Javascript Inheritance Explained</h1><h2 class=page-subtitle>Exhaustively trying everything until something makes sense</h2><span class=date><span>Monday, November 23, 2015</span></span><br><hr></div><article class=post><p>The first step to understanding inheritance in Javascript is to forget everything you know about <a href=https://i.imgur.com/c5M0p2n.jpg><del>slipcovers</del></a> inheritance. <strong>Javascript doesn&#39;t have classes or instances. Javascript has prototypes.</strong> There are many ways of working with prototypes. <strong>Let&#39;s have a look at all of them.</strong></p><h2 id=how-prototypes-work>How Prototypes Work</h2><ol><li>Javascript has <strong>objects</strong>.</li><li>All <strong>objects</strong> have exactly one <strong>prototype</strong>.<ul><li>This <strong>prototype</strong> is a <strong>special <u>internal</u> property</strong> of its <strong>object</strong></li><li>Meaning we can&#39;t access it directly via <strong>dot</strong> or <strong>square bracket</strong> syntax.</li></ul></li><li>All <strong>prototypes</strong> are themselves just <strong>objects</strong>.<ul><li>Thus all <strong>prototypes</strong> have a <strong>prototype</strong>.<ul><li>This is called the <strong>prototype chain</strong>. (more below)</li></ul></li></ul></li><li>An <strong>object&#39;s</strong> prototype can be <code>null</code>.<ul><li>This can be interpreted as the <strong>object</strong> having no (a null) <strong>prototype</strong>.</li></ul></li><li>All <strong>prototype chains</strong> eventually end with <code>null</code>.</li><li>Attempting to <strong>get</strong> a property on an <strong>object</strong> results in the first of:<ol><li>If <strong>object</strong> has the property, return its value.</li><li>If <strong>object&#39;s prototype</strong> has the property, return its value.</li><li>Continue checking up the <strong>prototype chain</strong> returning its value if we find the property.</li><li>return <code>undefined</code> if we&#39;ve reached the end of the <strong>prototype chain</strong></li></ol></li><li>Attempting to <strong>set</strong> a property on an <strong>object</strong> follows this logic:<ol><li>Set the property directly on the object.<ul><li>You&#39;ll notice no prototypes are involved. <strong>All property assignments happen directly on the specified object.</strong></li></ul></li></ol></li></ol><p><strong>That is all, there is nothing more needed to describe prototypes.</strong> Read that list a few more times and let it sink in.</p><h2 id=it-39-s-prototypes-all-the-way-down>It&#39;s prototypes all the way down</h2><p>We can use <code>Object.getPrototypeOf()</code> to... get an object&#39;s prototype.</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=nb>Object</span><span class=p>.</span><span class=nx>getPrototypeOf</span><span class=p>({});</span>
+<span class=c1>//-&gt; Object { , 15 more… }</span>
+</code></pre></div><p>An object literal&#39;s prototype is <code>Object.prototype</code></p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>{};</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>getPrototypeOf</span><span class=p>(</span><span class=nx>a</span><span class=p>)</span> <span class=o>===</span> <span class=nb>Object</span><span class=p>.</span><span class=nx>prototype</span><span class=p>;</span>
+<span class=c1>//-&gt; true</span>
+</code></pre></div><p><code>Object.prototype</code> is there just to give objects something to inherit from. It is <strong>not</strong> <code>Object</code>&#39;s prototype.</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=nb>Object</span><span class=p>.</span><span class=nx>getPrototypeOf</span><span class=p>(</span><span class=nb>Object</span><span class=p>)</span> <span class=o>===</span> <span class=nb>Object</span><span class=p>.</span><span class=nx>prototype</span><span class=p>;</span>
+<span class=c1>//-&gt; false</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>getPrototypeOf</span><span class=p>(</span><span class=nb>Object</span><span class=p>)</span>
+<span class=c1>//-&gt; function ()</span>
+</code></pre></div><p><strong>Remember</strong> functions are objects and can have properties, and <code>Object</code> is a constructor function for objects. <code>function ()</code>&#39;s prototype is <code>Object.prototype</code></p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=kd>var</span> <span class=nx>c</span> <span class=o>=</span> <span class=nb>Object</span><span class=p>.</span><span class=nx>getPrototypeOf</span><span class=p>(</span><span class=nb>Object</span><span class=p>)</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>getPrototypeOf</span><span class=p>(</span><span class=nx>c</span><span class=p>)</span> <span class=o>===</span> <span class=nb>Object</span><span class=p>.</span><span class=nx>prototype</span><span class=p>;</span>
+<span class=c1>//-&gt; true</span>
+</code></pre></div><p>Think about this for a second. <code>Object</code>&#39;s prototype&#39;s prototype is <code>Object.prototype</code>. <code>Object.prototype</code>&#39;s prototype is <code>null</code>.</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=nb>Object</span><span class=p>.</span><span class=nx>getPrototypeOf</span><span class=p>(</span><span class=nb>Object</span><span class=p>.</span><span class=nx>prototype</span><span class=p>)</span>
+<span class=c1>//-&gt; null</span>
+</code></pre></div><p>It ends with <code>null</code>.</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=nb>Object</span><span class=p>.</span><span class=nx>getPrototypeOf</span><span class=p>(</span><span class=kc>null</span><span class=p>)</span>
+<span class=c1>//X TypeError: can&#39;t convert null to object</span>
+</code></pre></div><h2 id=what-is-a-prototype-chain™>What is a Prototype Chain™?</h2><p>An object&#39;s <strong>Prototype Chain</strong> is what you would get if you called <code>Object.getPrototypeOf()</code> on said object, and then successively called <code>Object.getPrototypeOf()</code> on what was returned until you reached <code>null</code>.</p><p>For example, the prototype chain of an object literal is:<br><code>Object.prototype</code> -&gt; <code>null</code></p><p>The prototype chain of an array literal is:<br><code>Array ()</code> -&gt; <code>Object.prototype</code> -&gt; <code>null</code></p><p><strong>At the end of every prototype chain</strong> is <code>Object.prototype</code> and then <code>null</code>.</p><h2 id=using-the-new-operator>Using the new Operator</h2><p>The <code>new</code> operator has been around for a long time and most Javascript developers are at least somewhat familiar with it. <code>new</code> must be used with a function. If someone tells you that <code>new</code> is used with &quot;constructor functions&quot; they are lying. There is no such thing as a constructor function in javascript. All functions are just functions. Let&#39;s see how <code>new</code> works:</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=kd>var</span> <span class=nx>Person</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(){};</span>
+<span class=nx>Person</span><span class=p>.</span><span class=nx>prototype</span><span class=p>.</span><span class=nx>fullName</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(){</span>
+  <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>firstName</span> <span class=o>+</span> <span class=s2>&quot; &quot;</span> <span class=o>+</span> <span class=k>this</span><span class=p>.</span><span class=nx>lastName</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=c1>//          ⇣</span>
+<span class=kd>var</span> <span class=nx>gary</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Person</span><span class=p>();</span>
+<span class=nx>gary</span><span class=p>.</span><span class=nx>firstName</span> <span class=o>=</span> <span class=s2>&quot;Gary&quot;</span><span class=p>;</span>
+<span class=nx>gary</span><span class=p>.</span><span class=nx>lastName</span> <span class=o>=</span> <span class=s2>&quot;Coleman&quot;</span><span class=p>;</span>
+
+<span class=nx>gary</span> <span class=k>instanceof</span> <span class=nx>Person</span><span class=p>;</span>
+<span class=c1>//-&gt; true</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>getPrototypeOf</span><span class=p>(</span><span class=nx>gary</span><span class=p>)</span> <span class=o>===</span> <span class=nx>Person</span><span class=p>.</span><span class=nx>prototype</span><span class=p>;</span>
+<span class=c1>//-&gt; true</span>
+<span class=nx>gary</span><span class=p>.</span><span class=nx>constructor</span> <span class=o>===</span> <span class=nx>Person</span><span class=p>;</span>
+<span class=c1>//-&gt; true</span>
+<span class=nx>gary</span><span class=p>.</span><span class=nx>fullName</span> <span class=o>===</span> <span class=nb>Object</span><span class=p>.</span><span class=nx>getPrototypeOf</span><span class=p>(</span><span class=nx>gary</span><span class=p>).</span><span class=nx>fullName</span>
+</code></pre></div><p>When we use <code>new</code> exactly 5 things happen:</p><ol><li>a new <strong>empty object</strong> is created</li><li>This new <strong>empty object</strong> has its <strong>prototype</strong> set to the <strong>property prototype</strong> of the supplied function.<ul><li><strong>Extremely Important:</strong> I did not say the supplied function&#39;s prototype, I said the <strong>property</strong> with the <strong>key of prototype</strong> on the supplied function.</li><li>All functions have a default property with the key of prototype that is an empty object.</li><li>Yes, this is very confusing.</li></ul></li><li><code>new</code> then sets a non-enumerable property named <strong>constructor</strong> on this empty object, to the supplied function.<ul><li>something like <code>{}.constructor = Person</code></li></ul></li><li>The <strong>supplied function</strong> is called with <code>this</code> set to the <strong>new object</strong></li><li><strong>IF</strong>, the <strong>supplied function</strong>, <strong>returns undefined</strong>, <code>new</code> automatically returns the <code>this</code> value in the function.<ul><li>Re-read point 5 over and over until it sinks in.</li></ul></li></ol><p>We can simulate <code>new</code> like so:</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=c1>// Same Person definition from before</span>
+<span class=kd>var</span> <span class=nx>Person</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(){};</span>
+<span class=nx>Person</span><span class=p>.</span><span class=nx>prototype</span><span class=p>.</span><span class=nx>fullName</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(){</span>
+  <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>firstName</span> <span class=o>+</span> <span class=s2>&quot; &quot;</span> <span class=o>+</span> <span class=k>this</span><span class=p>.</span><span class=nx>lastName</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=c1>// Create the new empty object</span>
+<span class=kd>var</span> <span class=nx>gary</span> <span class=o>=</span> <span class=p>{};</span>
+<span class=c1>// Set its prototype</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>setPrototypeOf</span><span class=p>(</span><span class=nx>gary</span><span class=p>,</span> <span class=nx>Person</span><span class=p>.</span><span class=nx>prototype</span><span class=p>);</span>
+<span class=c1>// give it a non-enumerable constructor property</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>defineProperty</span><span class=p>(</span><span class=nx>gary</span><span class=p>,</span> <span class=s2>&quot;constructor&quot;</span><span class=p>,</span> <span class=p>{</span>
+  <span class=nx>enumerable</span><span class=o>:</span> <span class=kc>false</span><span class=p>,</span>
+  <span class=nx>value</span><span class=o>:</span> <span class=nx>Person</span>
+<span class=p>});</span>
+<span class=c1>// Call our Person function with this set to our new object</span>
+<span class=c1>// and if it returns undefined, return gary instead</span>
+<span class=nx>gary</span> <span class=o>=</span> <span class=p>(</span><span class=kd>function</span><span class=p>(){</span>
+  <span class=kd>var</span> <span class=nx>result</span> <span class=o>=</span> <span class=nx>Person</span><span class=p>.</span><span class=nx>call</span><span class=p>(</span><span class=nx>gary</span><span class=p>);</span>
+  <span class=k>if</span><span class=p>(</span><span class=nx>result</span> <span class=o>===</span> <span class=kc>undefined</span><span class=p>){</span>
+    <span class=k>return</span> <span class=nx>gary</span><span class=p>;</span>
+  <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=nx>result</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>)()</span>
+<span class=c1>// Set some properties directly on gary</span>
+<span class=nx>gary</span><span class=p>.</span><span class=nx>firstName</span> <span class=o>=</span> <span class=s2>&quot;Gary&quot;</span><span class=p>;</span>
+<span class=nx>gary</span><span class=p>.</span><span class=nx>lastName</span> <span class=o>=</span> <span class=s2>&quot;Coleman&quot;</span><span class=p>;</span>
+
+<span class=nx>gary</span> <span class=k>instanceof</span> <span class=nx>Person</span><span class=p>;</span>
+<span class=c1>//-&gt; true</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>getPrototypeOf</span><span class=p>(</span><span class=nx>gary</span><span class=p>)</span> <span class=o>===</span> <span class=nx>Person</span><span class=p>.</span><span class=nx>prototype</span><span class=p>;</span>
+<span class=c1>//-&gt; true</span>
+<span class=nx>gary</span><span class=p>.</span><span class=nx>constructor</span> <span class=o>===</span> <span class=nx>Person</span><span class=p>;</span>
+<span class=c1>//-&gt; true</span>
+<span class=nx>gary</span><span class=p>.</span><span class=nx>fullName</span> <span class=o>===</span> <span class=nb>Object</span><span class=p>.</span><span class=nx>getPrototypeOf</span><span class=p>(</span><span class=nx>gary</span><span class=p>).</span><span class=nx>fullName</span>
+</code></pre></div><p>The <code>constructor</code> part is pretty useless so let&#39;s ignore that. Concisely, <code>new</code> <strong>constructs a new object by passing it through a function and setting it&#39;s prototype to the prototype property of that function</strong>.</p><h2 id=using-class-and-extends>Using class and extends</h2><p>EcmaScript 6 introduces 2 new keywords to the language, <strong>class</strong> and <strong>extends</strong>. The purpose of these is to <del>further abstract away</del> simplify working with <strong>prototypes</strong>. You can think of <code>class</code> and <code>exends</code> as <strong>metaprogramming</strong>. Code that writes code. Let&#39;s have a look.</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=kr>class</span> <span class=nx>Person</span> <span class=p>{</span>
+  <span class=nx>constructor</span><span class=p>(</span><span class=nx>name</span><span class=p>){</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>firstName</span> <span class=o>=</span> <span class=nx>name</span><span class=p>;</span>
+  <span class=p>}</span>
+
+  <span class=nx>fullName</span><span class=p>(){</span>
+    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>firstName</span> <span class=o>+</span> <span class=s2>&quot; &quot;</span> <span class=o>+</span> <span class=k>this</span><span class=p>.</span><span class=nx>lastName</span><span class=p>;</span>
+  <span class=p>}</span>
+
+  <span class=kr>static</span> <span class=nx>someMethod</span><span class=p>(){</span>
+    <span class=k>return</span> <span class=s2>&quot;this is a simulated static method&quot;</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+<span class=k>typeof</span> <span class=nx>Person</span><span class=p>;</span>
+<span class=c1>//-&gt; &quot;function&quot;</span>
+
+<span class=kd>var</span> <span class=nx>gary</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Person</span><span class=p>(</span><span class=s2>&quot;Gary&quot;</span><span class=p>);</span>
+<span class=nx>Person</span><span class=p>.</span><span class=nx>someMethod</span><span class=p>();</span>
+</code></pre></div><p>Let&#39;s notice that the syntax inside a &quot;class definition&quot; is unique. It somewhat resembles an object but there are no colons, function keywords, or commas between properties. There is also a new <code>static</code> keyword. The static keyword is used to create properties directly on the resulting function instead of on its prototype property.</p><p>Here&#39;s the equivalent without using <code>class</code>:</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=c1>// same old &quot;constructor&quot; style function we&#39;re used to</span>
+<span class=kd>function</span> <span class=nx>Person</span><span class=p>(</span><span class=nx>name</span><span class=p>){</span>
+  <span class=k>this</span><span class=p>.</span><span class=nx>firstName</span> <span class=o>=</span> <span class=nx>name</span><span class=p>;</span>
+  <span class=k>return</span> <span class=k>this</span><span class=p>;</span>
+<span class=p>};</span>
+<span class=c1>// fullName is on the prototype property</span>
+<span class=nx>Person</span><span class=p>.</span><span class=nx>prototype</span><span class=p>.</span><span class=nx>fullName</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(){</span>
+  <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>firstName</span> <span class=o>+</span> <span class=s2>&quot; &quot;</span> <span class=o>+</span> <span class=k>this</span><span class=p>.</span><span class=nx>lastName</span><span class=p>;</span>
+<span class=p>};</span>
+<span class=c1>// someMethod is directly on the function</span>
+<span class=nx>Person</span><span class=p>.</span><span class=nx>someMethod</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(){</span>
+  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&quot;This is a simulated static method&quot;</span><span class=p>);</span>
+<span class=p>};</span>
+<span class=c1>// usage is the same</span>
+<span class=kd>var</span> <span class=nx>gary</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Person</span><span class=p>(</span><span class=s2>&quot;Gary&quot;</span><span class=p>);</span>
+<span class=nx>Person</span><span class=p>.</span><span class=nx>someMethod</span><span class=p>();</span>
+
+<span class=c1>// or without using new</span>
+
+<span class=kd>var</span> <span class=nx>gary</span> <span class=o>=</span> <span class=nx>Person</span><span class=p>.</span><span class=nx>call</span><span class=p>({},</span> <span class=s2>&quot;Gary&quot;</span><span class=p>);</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>setPrototypeOf</span><span class=p>(</span><span class=nx>gary</span><span class=p>,</span> <span class=nx>Person</span><span class=p>.</span><span class=nx>prototype</span><span class=p>);</span>
+</code></pre></div><p><code>extends</code> helps us set up the prototype chain and allows for calling <code>super</code>, a very common feature in languages with classical inheritance.</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=kr>class</span> <span class=nx>Ninja</span> <span class=kr>extends</span> <span class=nx>Person</span> <span class=p>{</span>
+
+  <span class=nx>constructor</span><span class=p>(</span><span class=nx>name</span><span class=p>,</span> <span class=nx>stealthMode</span><span class=p>){</span>
+    <span class=c1>// We must call super here!</span>
+    <span class=kr>super</span><span class=p>(</span><span class=nx>name</span><span class=p>);</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>stealthMode</span> <span class=o>=</span> <span class=nx>stealthMode</span><span class=p>;</span>
+  <span class=p>}</span>
+
+  <span class=nx>hide</span><span class=p>(){</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>stealthMode</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+  <span class=p>}</span>
+
+  <span class=nx>fullName</span><span class=p>(){</span>
+    <span class=k>return</span> <span class=kr>super</span><span class=p>.</span><span class=nx>fullName</span><span class=p>()</span> <span class=o>+</span> <span class=s2>&quot; Ninja!&quot;</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>var</span> <span class=nx>ishikawa</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Ninja</span><span class=p>(</span><span class=s2>&quot;Ishikawa&quot;</span><span class=p>,</span> <span class=kc>false</span><span class=p>);</span>
+</code></pre></div><p>Notice that you must call super() in the constructor function if you want <code>this</code> to be correct.</p><p>Here&#39;s a rough equivalent, I say rough because the notion of super is less magical.</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=kd>function</span> <span class=nx>Ninja</span><span class=p>(</span><span class=nx>name</span><span class=p>,</span> <span class=nx>stealthMode</span><span class=p>){</span>
+  <span class=c1>// instead of calling super();</span>
+  <span class=k>this</span> <span class=o>=</span> <span class=nx>Person</span><span class=p>.</span><span class=nx>call</span><span class=p>(</span><span class=k>this</span><span class=p>,</span> <span class=nx>name</span><span class=p>);</span>
+  <span class=k>this</span><span class=p>.</span><span class=nx>stealthMode</span> <span class=o>=</span> <span class=nx>stealthMode</span><span class=p>;</span>
+  <span class=k>return</span> <span class=k>this</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>setPrototypeOf</span><span class=p>(</span><span class=nx>Ninja</span><span class=p>.</span><span class=nx>prototype</span><span class=p>,</span> <span class=nx>Person</span><span class=p>.</span><span class=nx>prototype</span><span class=p>);</span>
+<span class=nx>Ninja</span><span class=p>.</span><span class=nx>prototype</span><span class=p>.</span><span class=kr>super</span> <span class=o>=</span> <span class=nx>Person</span><span class=p>.</span><span class=nx>prototype</span><span class=p>;</span>
+
+<span class=nx>Ninja</span><span class=p>.</span><span class=nx>prototype</span><span class=p>.</span><span class=nx>hide</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(){</span>
+  <span class=k>this</span><span class=p>.</span><span class=nx>stealthMode</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=nx>Ninja</span><span class=p>.</span><span class=nx>prototype</span><span class=p>.</span><span class=nx>fullName</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(){</span>
+  <span class=c1>// instead of using super</span>
+  <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=kr>super</span><span class=p>.</span><span class=nx>fullName</span><span class=p>.</span><span class=nx>call</span><span class=p>(</span><span class=k>this</span><span class=p>)</span> <span class=o>+</span> <span class=s2>&quot; Ninja!&quot;</span><span class=p>;</span>
+  <span class=c1>// or without a super property</span>
+  <span class=c1>// return Object.getPrototypeOf(this).fullName.call(this) + &quot; Ninja!&quot;;</span>
+<span class=p>}</span>
+
+<span class=kd>var</span> <span class=nx>ishikawa</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Ninja</span><span class=p>(</span><span class=s2>&quot;Ishikawa&quot;</span><span class=p>,</span> <span class=kc>false</span><span class=p>);</span>
+
+<span class=c1>//----- Or without using new</span>
+
+<span class=kd>var</span> <span class=nx>ishikawa</span> <span class=o>=</span> <span class=nx>Ninja</span><span class=p>.</span><span class=nx>call</span><span class=p>({},</span> <span class=s2>&quot;Ishikawa&quot;</span><span class=p>,</span> <span class=kc>false</span><span class=p>);</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>setPrototypeOf</span><span class=p>(</span><span class=nx>ishikawa</span><span class=p>,</span> <span class=nx>Ninja</span><span class=p>.</span><span class=nx>prototype</span><span class=p>);</span>
+</code></pre></div><p><code>class</code> and <code>extends</code> offer some conveniences but at the cost of a complex abstraction. <code>extends</code> is particularly useful if you want a simple way to call super though using <code>Object.getPrototypeOf</code> doesn&#39;t seem that hard to me (but damn is it clunky). Remember, <strong>we&#39;re still just creating functions and setting prototypes.</strong></p><h2 id=using-object-create>Using Object.create()</h2><p><strong>Object.create()</strong> exists. It takes 2 parameters, an object and an optional property specification, and works exactly like this:</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=kd>var</span> <span class=nx>Person</span> <span class=o>=</span> <span class=p>{</span>
+  <span class=nx>fullName</span><span class=o>:</span> <span class=kd>function</span><span class=p>(){</span>
+    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>firstName</span> <span class=o>+</span> <span class=s2>&quot; &quot;</span> <span class=o>+</span> <span class=k>this</span><span class=p>.</span><span class=nx>lastName</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>var</span> <span class=nx>gary</span> <span class=o>=</span> <span class=nb>Object</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>Person</span><span class=p>,</span> <span class=p>{</span>
+  <span class=nx>firstName</span><span class=o>:</span> <span class=p>{</span>
+    <span class=nx>value</span><span class=o>:</span> <span class=s2>&quot;Gary&quot;</span><span class=p>,</span>
+    <span class=nx>writable</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>
+    <span class=nx>enumerable</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>
+    <span class=nx>configurable</span><span class=o>:</span> <span class=kc>true</span>
+  <span class=p>}</span>
+<span class=p>});</span>
+
+<span class=c1>//--- Equivalent code</span>
+
+<span class=kd>var</span> <span class=nx>gary</span> <span class=o>=</span> <span class=nb>Object</span><span class=p>.</span><span class=nx>defineProperties</span><span class=p>({},</span> <span class=p>{</span>
+  <span class=nx>firstName</span><span class=o>:</span> <span class=p>{</span>
+    <span class=nx>value</span><span class=o>:</span> <span class=s2>&quot;Gary&quot;</span><span class=p>,</span>
+    <span class=nx>writable</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>
+    <span class=nx>enumerable</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>
+    <span class=nx>configurable</span><span class=o>:</span> <span class=kc>true</span>
+  <span class=p>}</span>
+<span class=p>});</span>
+
+<span class=nb>Object</span><span class=p>.</span><span class=nx>setPrototypeOf</span><span class=p>(</span><span class=nx>gary</span><span class=p>,</span> <span class=nx>Person</span><span class=p>);</span>
+</code></pre></div><p>At least that&#39;s pretty straight forward, even if the second parameter is completely obnoxious. It would have been great if the second parameter was simply an object of properties to copy over but alas they made it work like <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties?redirectlocale=en-US&amp;redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FObject%2FdefineProperties">Object.defineProperties</a> Anyway we can use <code>Object.create</code> to very simply create prototype chains, though since the resulting objects were not &quot;constructed&quot; with <code>new</code>, <code>instanceof</code> will not work by default. (More on that below):</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=c1>//  Person is an object not a function</span>
+<span class=kd>var</span> <span class=nx>Person</span> <span class=o>=</span> <span class=p>{</span>
+  <span class=nx>fullName</span><span class=o>:</span> <span class=kd>function</span><span class=p>(){</span>
+    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>firstName</span> <span class=o>+</span> <span class=s2>&quot; &quot;</span> <span class=o>+</span> <span class=k>this</span><span class=p>.</span><span class=nx>lastName</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=c1>// Ninja has Person as it&#39;s prototype</span>
+<span class=kd>var</span> <span class=nx>Ninja</span> <span class=o>=</span> <span class=nb>Object</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>Person</span><span class=p>);</span>
+<span class=nx>Ninja</span><span class=p>.</span><span class=nx>hide</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(){</span>
+  <span class=k>this</span><span class=p>.</span><span class=nx>stealthMode</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=nx>ishikawa</span> <span class=o>=</span> <span class=nb>Object</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>Ninja</span><span class=p>);</span>
+<span class=nx>ishikawa</span><span class=p>.</span><span class=nx>firstName</span> <span class=o>=</span> <span class=s2>&quot;Ishikawa&quot;</span><span class=p>;</span>
+<span class=nx>ishikawa</span><span class=p>.</span><span class=nx>lastName</span> <span class=o>=</span> <span class=s2>&quot;Goemon&quot;</span><span class=p>;</span>
+
+<span class=nb>Object</span><span class=p>.</span><span class=nx>getPrototypeOf</span><span class=p>(</span><span class=nx>ishikawa</span><span class=p>)</span> <span class=o>===</span> <span class=nx>Ninja</span>
+<span class=c1>// true</span>
+
+<span class=nx>ishikawa</span> <span class=k>instanceof</span> <span class=nx>Ninja</span>
+<span class=c1>//X TypeError</span>
+</code></pre></div><p>This is a very straight forward way of working with prototypes.</p><h2 id=working-with-prototypes-directly>Working with prototypes directly</h2><p><code>Object.getPrototypeOf</code> is part of the ES5 standard and is supported by all modern browsers. With ES6 we also get <code>Object.setPrototypeOf</code> though with the caveat that it has large performance implications and should be avoided in favor of <code>Object.create</code>. With these two functions we can <strong>directly manipulate any object&#39;s prototype.</strong></p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=kd>var</span> <span class=nx>Person</span> <span class=o>=</span> <span class=p>{</span>
+  <span class=nx>fullName</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(){</span>
+   <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>firstName</span> <span class=o>+</span> <span class=s2>&quot; &quot;</span> <span class=o>+</span> <span class=k>this</span><span class=p>.</span><span class=nx>lastName</span><span class=p>;</span>
+ <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>var</span> <span class=nx>gary</span> <span class=o>=</span> <span class=p>{</span>
+  <span class=nx>firstName</span><span class=o>:</span> <span class=s2>&quot;Gary&quot;</span><span class=p>,</span>
+  <span class=nx>lastName</span><span class=o>:</span> <span class=s2>&quot;Coleman&quot;</span>
+<span class=p>}</span>
+
+<span class=nb>Object</span><span class=p>.</span><span class=nx>setPrototypeOf</span><span class=p>(</span><span class=nx>gary</span><span class=p>,</span> <span class=nx>Person</span><span class=p>);</span>
+</code></pre></div><p>Dang, that&#39;s so clear and understandable it almost makes no sense coming from Javascript. :) There&#39;s actually nothing to explain.</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=kd>var</span> <span class=nx>Ninja</span> <span class=o>=</span> <span class=p>{</span>
+  <span class=nx>hide</span><span class=o>:</span> <span class=kd>function</span><span class=p>(){</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>stealthMode</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>setPrototypeOf</span><span class=p>(</span><span class=nx>Ninja</span><span class=p>,</span> <span class=nx>Person</span><span class=p>);</span>
+
+<span class=kd>var</span> <span class=nx>ishikawa</span> <span class=o>=</span> <span class=p>{</span>
+  <span class=nx>firstName</span><span class=o>:</span> <span class=s2>&quot;Ishikawa&quot;</span><span class=p>,</span>
+  <span class=nx>lastName</span><span class=o>:</span> <span class=err>&quot;</span><span class=nx>Goemon</span>
+<span class=p>}</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>setPrototypeOf</span><span class=p>(</span><span class=nx>ishikawa</span><span class=p>,</span> <span class=nx>Ninja</span><span class=p>)</span>
+</code></pre></div><p>Now <code>ishikawa</code> has both <code>Ninja</code> and <code>Person</code> in it&#39;s prototype chain. Want to get weird and simulate class methods?</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=kd>var</span> <span class=nx>Person</span> <span class=o>=</span> <span class=p>{</span>
+  <span class=nx>proto</span><span class=o>:</span> <span class=p>{</span>
+    <span class=nx>firstName</span><span class=o>:</span> <span class=kd>function</span><span class=p>(){</span>
+      <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>firstName</span> <span class=o>+</span> <span class=s2>&quot; &quot;</span> <span class=o>+</span> <span class=k>this</span><span class=p>.</span><span class=nx>lastName</span><span class=p>;</span>
+    <span class=p>}</span>
+  <span class=p>},</span>
+  <span class=nx>someClassMethod</span><span class=o>:</span> <span class=kd>function</span><span class=p>(){</span>
+    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&quot;This is a simulated class method&quot;</span><span class=p>);</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+<span class=kd>var</span> <span class=nx>Ninja</span> <span class=o>=</span> <span class=p>{</span>
+  <span class=nx>proto</span><span class=o>:</span> <span class=p>{</span>
+    <span class=nx>hide</span><span class=o>:</span> <span class=kd>function</span><span class=p>(){</span>
+      <span class=k>this</span><span class=p>.</span><span class=nx>stealthMode</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+    <span class=p>}</span>
+  <span class=p>},</span>
+  <span class=nx>someClassMethod</span><span class=o>:</span> <span class=kd>function</span><span class=p>(){</span>
+    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&quot;This overrides the class method.&quot;</span><span class=p>);</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>setPrototypeOf</span><span class=p>(</span><span class=nx>Ninja</span><span class=p>,</span> <span class=nx>Person</span><span class=p>);</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>setPrototypeOf</span><span class=p>(</span><span class=nx>Ninja</span><span class=p>.</span><span class=nx>proto</span><span class=p>,</span> <span class=nx>Person</span><span class=p>.</span><span class=nx>proto</span><span class=p>);</span>
+
+<span class=kd>var</span> <span class=nx>ishikawa</span> <span class=o>=</span> <span class=p>{</span>
+  <span class=nx>firstName</span><span class=o>:</span> <span class=s2>&quot;Ishikawa&quot;</span><span class=p>,</span>
+  <span class=nx>lastName</span><span class=o>:</span> <span class=s2>&quot;Goemon&quot;</span><span class=p>,</span>
+  <span class=nx>stealthMode</span><span class=o>:</span> <span class=kc>false</span>
+<span class=p>}</span>
+
+<span class=nb>Object</span><span class=p>.</span><span class=nx>setPrototypeOf</span><span class=p>(</span><span class=nx>ishikawa</span><span class=p>,</span> <span class=nx>Ninja</span><span class=p>);</span>
+
+<span class=nx>ishikawa</span><span class=p>.</span><span class=nx>fullName</span><span class=p>()</span>
+<span class=c1>//-&gt; &quot;Ishikawa Goemon&quot;;</span>
+<span class=nx>Person</span><span class=p>.</span><span class=nx>someClassMethod</span><span class=p>();</span>
+<span class=c1>//-&gt; &quot;This is a simulated class method&quot;</span>
+<span class=nx>Ninja</span><span class=p>.</span><span class=nx>someClassMethod</span><span class=p>();</span>
+<span class=c1>//-&gt; &quot;This overrides the class method.&quot;</span>
+</code></pre></div><p>No magic functions, just throwing prototypes all over the place. But alas, due to performance implications use of <code>Object.setPrototypeOf</code> is <a href=http://stackoverflow.com/questions/23807805/why-is-mutating-the-prototype-of-an-object-bad-for-performance>highly discouraged</a>.</p><h2 id=a-note-on-instanceof>A note on instanceof</h2><p>Javascript <strong>does not have class instances</strong>. What <code>instanceof</code> is actually doing is quite simple:</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=c1>// left          right</span>
+<span class=c1>// ⇣             ⇣</span>
+<span class=nx>gary</span> <span class=k>instanceof</span> <span class=nx>Person</span><span class=p>;</span>
+</code></pre></div><p><code>instanceof</code> takes anything on the left and requires a function on the right. It then looks up left&#39;s prototype chain for right&#39;s prototype property returning <code>true</code> if it&#39;s found and <code>false</code> if not. We can implement it ourselves like so:</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=kd>function</span> <span class=nx>instanceOf</span><span class=p>(</span><span class=nx>left</span><span class=p>,</span> <span class=nx>right</span><span class=p>){</span>
+  <span class=k>if</span><span class=p>(</span><span class=k>typeof</span> <span class=nx>right</span> <span class=o>!==</span> <span class=s2>&quot;function&quot;</span><span class=p>)</span> <span class=k>throw</span> <span class=s2>&quot;TypeError&quot;</span><span class=p>;</span>
+  <span class=kd>var</span> <span class=nx>proto</span> <span class=o>=</span> <span class=nx>left</span><span class=p>;</span>
+  <span class=k>while</span><span class=p>(</span><span class=nx>proto</span> <span class=o>=</span> <span class=nb>Object</span><span class=p>.</span><span class=nx>getPrototypeOf</span><span class=p>(</span><span class=nx>proto</span><span class=p>)){</span>
+    <span class=k>if</span><span class=p>(</span><span class=nx>right</span><span class=p>.</span><span class=nx>prototype</span> <span class=o>===</span> <span class=nx>proto</span><span class=p>)</span> <span class=k>return</span> <span class=kc>true</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=k>return</span> <span class=kc>false</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p>This means that if we are setting prototypes manually or using <code>Object.create()</code> we can use <code>instanceof</code> by creating dummy functions to hold the objects.</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=kd>function</span> <span class=nx>dummy</span><span class=p>(</span><span class=nx>obj</span><span class=p>){</span>
+  <span class=kd>var</span> <span class=nx>f</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(){};</span>
+  <span class=nx>f</span><span class=p>.</span><span class=nx>prototype</span> <span class=o>=</span> <span class=nx>obj</span><span class=p>;</span>
+  <span class=k>return</span> <span class=nx>f</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=kd>var</span> <span class=nx>someObj</span> <span class=o>=</span> <span class=p>{</span><span class=nx>some</span><span class=o>:</span> <span class=s2>&quot;property&quot;</span><span class=p>};</span>
+<span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=nb>Object</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=nx>someObj</span><span class=p>);</span>
+<span class=nx>a</span> <span class=k>instanceof</span> <span class=nx>someObj</span><span class=p>;</span>
+<span class=c1>//X TypeError</span>
+<span class=nx>a</span> <span class=k>instanceof</span> <span class=nx>dummy</span><span class=p>(</span><span class=nx>someObj</span><span class=p>);</span>
+<span class=c1>//-&gt; true</span>
+</code></pre></div><h2 id=want-to-aggressively-program-with-prototypes>Want to aggressively program with prototypes?</h2><ul><li>Drop the notion of classes</li><li>Drop the notion of instances of classes</li><li>Want a &quot;type&quot; property? Just add one, everything is mutable anyway.</li><li>Don&#39;t try to inherit, set the prototype.</li><li>Forget about constructor functions.</li><li>Ignore the constructor property all together.</li><li>Embrace prototypes.</li></ul><h2 id=other-tidbits>Other Tidbits</h2><p>Many Javascript implementations have a <code>__proto__</code> property attached to objects. <strong>Don&#39;t use it, It&#39;s garbage.</strong> In fact, ignore it even exists all together. Your life will get better if you just blatantly ignore <code>__proto__</code>.</p><p>Many humans will try to convince you that every object in javascript inherits from <code>Object</code>. <strong>This is not true</strong>. Every object has at the end of its prototype chain <code>Object.prototype</code> and then <code>null</code>. There is no other accurate way to describe it and there is nothing else to say about what is going on.</p><p>I just said that all prototype chains end with <code>Object.prototype</code> -&gt; <code>null</code>. This is not strictly true. You can manually set a prototype to <code>null</code> thus abruptly ending the prototype chain. You can use this method to create a truly <strong>empty object</strong>.</p><div class=highlight><pre><code class=language-Javascript data-lang=Javascript><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>{};</span>
+<span class=nb>Object</span><span class=p>.</span><span class=nx>setPrototypeOf</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span> <span class=kc>null</span><span class=p>);</span>
+<span class=nx>a</span><span class=p>.</span><span class=nx>toString</span> <span class=o>===</span> <span class=kc>undefined</span><span class=p>;</span>
+<span class=c1>//-&gt; true, a has no properties, and no prototype. It is truly empty</span>
+<span class=c1>// Or alternatively</span>
+<span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=nb>Object</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=kc>null</span><span class=p>)</span>
+</code></pre></div><h2 id=conclusion>Conclusion</h2><p>Just remember that no matter what you type, no matter what the keywords say, <strong>it&#39;s all just objects and prototypes. The complexity is in the abstraction.</strong></p></article><div class=page-footer><h4>Another fine kettle of fish from the good folks at <i>Etufé</i>.</h4></div></div><footer><a href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA-4.0</a> 2015 &#9884; Etufé</footer><script src=//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js></script><script>window.jQuery || document.write('<script src="/_bower_components/jquery/jquery.min.js"><\/script>')</script><script src=/js/script.787e.js></script><script>var clicky_site_ids = clicky_site_ids || [];
+  clicky_site_ids.push(100824795);</script><script src=//static.getclicky.com/js></script></body></html>
